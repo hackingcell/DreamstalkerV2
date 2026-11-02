@@ -1,0 +1,33 @@
+modLoader="javafml"
+loaderVersion="[61,)"
+license="All Rights Reserved"
+
+[[mods]]
+modId="dreamstalker"
+version="0.1.0"
+displayName="Dream Stalker"
+description='''
+Sleep and something wakes up with you. Dream dimensions, watchers, voice whispers and a fake crash.
+'''
+
+[[dependencies.dreamstalker]]
+modId="forge"
+mandatory=true
+versionRange="[61,)"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.dreamstalker]]
+modId="minecraft"
+mandatory=true
+versionRange="[1.21.11]"
+ordering="NONE"
+side="BOTH"
+
+# Optional: voice mimic only works if Simple Voice Chat is installed.
+[[dependencies.dreamstalker]]
+modId="voicechat"
+mandatory=false
+versionRange="[2,)"
+ordering="AFTER"
+side="BOTH"
