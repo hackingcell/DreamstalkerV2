@@ -35,21 +35,27 @@ public class Watcher extends Monster {
     }
 
     /** UUID of the player whose skin this Watcher wears (synced to clients so everyone sees the same face). */
-    private static final EntityDataAccessor<Optional<UUID>> SKIN_OWNER =
-            SynchedEntityData.defineId(Watcher.class, EntityDataSerializers.OPTIONAL_UUID);
+    private static final EntityDataAccessor<String> SKIN_OWNER =
+            SynchedEntityData.defineId(Watcher.class, EntityDataSerializers.STRING);
 
     @Override
     protected void defineSynchedData(SynchedEntityData.Builder builder) {
         super.defineSynchedData(builder);
-        builder.define(SKIN_OWNER, Optional.empty());
+        builder.define(SKIN_OWNER, "");
     }
 
     public void setSkinOwner(UUID owner) {
-        this.entityData.set(SKIN_OWNER, Optional.ofNullable(owner));
+        this.entityData.set(SKIN_OWNER, owner == null ? "" : owner.toString());
     }
 
     public Optional<UUID> getSkinOwner() {
-        return this.entityData.get(SKIN_OWNER);
+        String raw = this.entityData.get(SKIN_OWNER);
+        if (raw.isEmpty()) return Optional.empty();
+        try {
+            return Optional.of(UUID.fromString(raw));
+        } catch (IllegalArgumentException e) {
+            return Optional.empty();
+        }
     }
 
     @Override

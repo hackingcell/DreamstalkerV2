@@ -70,7 +70,7 @@ public final class PrankManager {
     public static boolean onChat(ServerChatEvent event) {
         if (!Settings.PRANK_ENABLED) return false;
         ServerPlayer player = event.getPlayer();
-        MinecraftServer server = player.getServer();
+        MinecraftServer server = player.level().getServer();
         if (server == null) return false;
         String text = event.getRawText();
         UUID speaker = player.getUUID();

@@ -51,7 +51,7 @@ public final class DreamManager {
     public static void onLogout(PlayerEvent.PlayerLoggedOutEvent event) {
         if (event.getEntity() instanceof ServerPlayer sp) {
             Dream d = DREAMS.get(sp.getUUID());
-            MinecraftServer server = sp.getServer();
+            MinecraftServer server = sp.level().getServer();
             if (d != null && server != null) wake(server, sp, d); // bring them home before the save
         }
     }
